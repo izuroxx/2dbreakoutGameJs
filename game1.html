@@ -65,14 +65,24 @@
             dx = -dx;
             ballColor = getRandomColor();
         }
-        if(y + dy < ballRadius || y + dy > canvas.height - ballRadius){
+        if(y + dy < ballRadius){
             dy = -dy;
             ballColor = getRandomColor();
+        } else if(y + dy > canvas.height - ballRadius) {
+            if (x > paddleX && x < paddleX + paddleWidth) {
+                dy = -dy;
+
+            }
+            else {
+                alert("Game Over");
+                document.location.reload();
+            }
         }
+
         if(rightPressed && paddleX < canvas.width-paddleWidth) {
             paddleX += 7;
         }
-    else if(leftPressed && paddleX > 0) {
+        else if(leftPressed && paddleX > 0) {
             paddleX -= 7;
         }
         x += dx;
