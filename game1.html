@@ -14,6 +14,9 @@
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+
+    var ballColor = "#0095DD";
+    var paddleColor = "#0095DD";
 // set variables for controlable paddle
     var paddleHeight = 10;
     var paddleWidth = 75;
@@ -26,7 +29,7 @@
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = ballColor;
         ctx.fill();
         ctx.closePath();
     }
@@ -34,7 +37,7 @@
     function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = paddleColor;
         ctx.fill();
         ctx.closePath();
     }
@@ -51,17 +54,17 @@
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
-        drawPaddle();
         x += dx;
         y += dy;
         if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){
             dx = -dx;
-            ctx.fillStyle = getRandomColor();
+            ballColor = getRandomColor();
         }
         if(y + dy < ballRadius || y + dy > canvas.height - ballRadius){
             dy = -dy;
-            ctx.fillStyle = getRandomColor();
+            ballColor = getRandomColor();
         }
+        drawPaddle();
         if(rightPressed) {
             paddleX += 7;
         }
