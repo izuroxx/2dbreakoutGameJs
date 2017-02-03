@@ -31,6 +31,7 @@
     // def and init variables for pressed buttons
     var rightPressed = false;
     var leftPressed = false;
+    var spacePressed = false;
 
     function drawBall() {
         ctx.beginPath();
@@ -85,14 +86,17 @@
         else if(leftPressed && paddleX > 0) {
             paddleX -= 7;
         }
-        x += dx;
-        y += dy;
+        if(spacePressed){
+            x += dx;
+            y += dy;
+        }
     }
 
 
 // to listen for key presses -> set up two event listeners
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("keydown", spaceStartHandler, false);
 
     function keyDownHandler(e) {
         if(e.keyCode == 39) {
@@ -110,6 +114,11 @@
             leftPressed = false;
         }
 
+    }
+    function spaceStartHandler(s) {
+        if(s.keyCode == 32) {
+            spacePressed = true;
+        }
     }
 
     setInterval(draw, 10);
